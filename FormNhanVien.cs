@@ -16,6 +16,7 @@ namespace BTL_HSK
 {
     public partial class FormNhanVien : Form
     {
+        //public static string connectionString = ConfigurationManager.ConnectionStrings["conn"].ConnectionString;
         public static string connectionString = "Data Source=DELL\\DELL;Initial Catalog=QLKDquanao;Integrated Security=True";
         Boolean check = true;
         public FormNhanVien()
@@ -25,12 +26,12 @@ namespace BTL_HSK
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Bạn muốn thoát?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            DialogResult dg = MessageBox.Show("Bạn có chắc muốn thoát?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dg == DialogResult.OK)
             {
                 this.Close();
             }
         }
-
 
         private void FormNhanVien_Load(object sender, EventArgs e)
         {
@@ -92,7 +93,7 @@ namespace BTL_HSK
             return age;
         }
 
-        private static bool checkDuplicate(string hoten, string diachi, string sdt,  string ngaysinh, string gioitinh, string ngayvaolam, string luongcoban, string phucap)
+        private static bool checkDuplicate(string hoten, string diachi, string sdt, string ngaysinh, string gioitinh, string ngayvaolam, string luongcoban, string phucap)
         {
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
@@ -125,7 +126,7 @@ namespace BTL_HSK
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if(check == true)
+            if (check == true)
             {
                 string gioi_tinh = "";
                 if (rdbNam.Checked) gioi_tinh = "Nam";
@@ -144,16 +145,6 @@ namespace BTL_HSK
                 cmd.Parameters.AddWithValue("@ngay_vao_lam", DateTime.Parse(txtNgayvaolam.Text));
                 cmd.Parameters.AddWithValue("@luong_co_ban", float.Parse(txtLuongcoban.Text));
                 cmd.Parameters.AddWithValue("@phu_cap", float.Parse(txtPhucap.Text));
-                //int i = cmd.ExecuteNonQuery();
-                //if (i > 0)
-                //{
-                //    MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    hienDSNV();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Thêm không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
                 if (checkDuplicate(txtHoten.Text, txtDiachi.Text, txtSodienthoai.Text, txtNgaysinh.Text, gioi_tinh, txtNgayvaolam.Text, txtLuongcoban.Text, txtPhucap.Text))
                 {
                     MessageBox.Show("Nhân viên đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -185,7 +176,7 @@ namespace BTL_HSK
             txtLuongcoban.Text = dgvNhanVien.CurrentRow.Cells["Lương cơ bản"].Value.ToString();
             txtPhucap.Text = dgvNhanVien.CurrentRow.Cells["Phụ cấp"].Value.ToString();
             string gioi_tinh = dgvNhanVien.CurrentRow.Cells["Giới tính"].Value.ToString();
-            if(gioi_tinh == "Nam")
+            if (gioi_tinh == "Nam")
             {
                 rdbNam.Checked = true;
                 rdbNu.Checked = false;
@@ -194,13 +185,12 @@ namespace BTL_HSK
             {
                 rdbNam.Checked = false;
                 rdbNu.Checked = true;
-            }    
-
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            int ma_nv = int.Parse(dgvNhanVien.CurrentRow.Cells["Mã NV"].Value.ToString()                                                                    );
+            int ma_nv = int.Parse(dgvNhanVien.CurrentRow.Cells["Mã NV"].Value.ToString());
             string gioi_tinh = "";
             if (rdbNam.Checked) gioi_tinh = "Nam";
             else gioi_tinh = "Nữ";
@@ -263,11 +253,6 @@ namespace BTL_HSK
                 errorCheck.SetError(txtHoten, "Không được bỏ trống");
                 check = false;
             }
-            //else if (!Regex.IsMatch(txtHoten.Text, @"^(?![\s.]+$)[a-zA-Z\s.]*$"))
-            //{
-            //    errorCheck.SetError(txtHoten, "Họ tên chỉ bao gồm chữ");
-            //    check = false;
-            //}
             else
             {
                 errorCheck.SetError(txtHoten, "");
@@ -296,7 +281,7 @@ namespace BTL_HSK
                 errorCheck.SetError(txtSodienthoai, "Không được bỏ trống");
                 check = false;
             }
-            else if(txtSodienthoai.Text.Length >0 && txtSodienthoai.Text.Length <10)
+            else if (txtSodienthoai.Text.Length > 0 && txtSodienthoai.Text.Length < 10)
             {
                 errorCheck.SetError(txtSodienthoai, "Số điện thoại bao gồm 10 số");
                 check = false;
@@ -396,7 +381,7 @@ namespace BTL_HSK
                 gioitinh = "Nam";
             else
                 gioitinh = "Nữ";
-            
+
             string cond = "[Mã NV] > 0";
             if (!string.IsNullOrEmpty(hoten))
             {

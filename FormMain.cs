@@ -20,8 +20,23 @@ namespace BTL_HSK
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormNhanVien formNhanVien = new FormNhanVien();
-            formNhanVien.MdiParent = this;
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formNhanVien.TopLevel = false;
+            formNhanVien.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formNhanVien);
             formNhanVien.Show();
+        }
+
+        private void nhàCungCấpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormNhaCungCap formNhaCungCap = new FormNhaCungCap();
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formNhaCungCap.TopLevel = false;
+            formNhaCungCap.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formNhaCungCap);
+            formNhaCungCap.Show();
         }
     }
 }
