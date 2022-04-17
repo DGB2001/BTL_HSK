@@ -38,5 +38,16 @@ namespace BTL_HSK
             panelMain.Controls.Add(formNhaCungCap);
             formNhaCungCap.Show();
         }
+
+        private void nhânViênToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormReportNhanVien formReportNhanVien = new FormReportNhanVien();
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formReportNhanVien.TopLevel = false;
+            formReportNhanVien.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formReportNhanVien);
+            formReportNhanVien.Show();
+        }
     }
 }
