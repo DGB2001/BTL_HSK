@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BTL_HSK.Report {
+namespace BTL_HSK.Report.ReportNhanVien {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace BTL_HSK.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportNhanVien : ReportClass {
+    public class ReportDiaChiNhanVien : ReportClass {
         
-        public ReportNhanVien() {
+        public ReportDiaChiNhanVien() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportNhanVien.rpt";
+                return "ReportDiaChiNhanVien.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace BTL_HSK.Report {
         
         public override string FullResourceName {
             get {
-                return "BTL_HSK.Report.ReportNhanVien.rpt";
+                return "BTL_HSK.Report.ReportNhanVien.ReportDiaChiNhanVien.rpt";
             }
             set {
                 // Do nothing
@@ -90,17 +90,25 @@ namespace BTL_HSK.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_nguoi_lap_bao_cao {
+        public CrystalDecisions.Shared.IParameterField Parameter_tieu_de_bao_cao {
             get {
                 return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_nguoi_lap_bao_cao {
+            get {
+                return this.DataDefinition.ParameterFields[1];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportNhanVien : Component, ICachedReport {
+    public class CachedReportDiaChiNhanVien : Component, ICachedReport {
         
-        public CachedReportNhanVien() {
+        public CachedReportDiaChiNhanVien() {
         }
         
         [Browsable(false)]
@@ -137,7 +145,7 @@ namespace BTL_HSK.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportNhanVien rpt = new ReportNhanVien();
+            ReportDiaChiNhanVien rpt = new ReportDiaChiNhanVien();
             rpt.Site = this.Site;
             return rpt;
         }

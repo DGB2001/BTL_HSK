@@ -57,8 +57,8 @@ GO
  CREATE TABLE tblDonDatHang
  (
 	iSoHD INT PRIMARY KEY,
-	iMaNV INT REFERENCES dbo.tblNhanVien(iMaNV),
-	iMaKH INT REFERENCES dbo.tblKhachHang(iMaKH),
+	iMaNV INT REFERENCES dbo.tblNhanVien(iMaNV) NOT NULL,
+	iMaKH INT REFERENCES dbo.tblKhachHang(iMaKH) NOT NULL,
 	dNgayDatHang DATETIME,
 	dNgayGiaoHang DATETIME,
 	fTongTienHD FLOAT CHECK (fTongTienHD >0),
@@ -80,7 +80,7 @@ GO
 CREATE TABLE tblDonNhapKho
 (
 	iSoNK INT PRIMARY KEY,
-	iMaNV INT REFERENCES dbo.tblNhanVien(iMaNV),
+	iMaNV INT REFERENCES dbo.tblNhanVien(iMaNV) NOT NULL,
 	dNgayNhapHang DATETIME,
 	fTongSoLuong FLOAT CHECK(fTongSoLuong >0)
 )
@@ -140,10 +140,10 @@ INSERT INTO dbo.tblMatHang VALUES
 	GO
 --tblDonNhapKho
 INSERT INTO dbo.tblDonNhapKho VALUES
-	(511, 1010, '2020/01/23', 800),
-	(512, 1011, '2021/11/12', 500),
-	(513, 1012, '2021/04/25', 600),
-	(514, 1013, '2020/07/07', 900)
+	(511, 1, '2020/01/23', 800),
+	(512, 2, '2021/11/12', 500),
+	(513, 3, '2021/04/25', 600),
+	(514, 4, '2020/07/07', 900)
 	GO
 --tblChiTietNhapKho
 INSERT INTO dbo.tblChiTietNhapKho VALUES
@@ -221,7 +221,7 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	create procedure xoa_nv @ma_nv int
 	as
 	delete from tblNhanVien where iMaNV=@ma_nv
-	GO;
+	GO
 
 	-- sua nhan vien
 	create procedure sua_nv @ma_nv int, @ten_nv nvarchar(30), @dia_chi nvarchar(30), 
@@ -242,6 +242,14 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	where sTenNV = @ten_nv and sDiaChi = @dia_chi and sDienThoai = @sdt 
 	and dNgaySinh = @ngay_sinh and sGioiTinh = @gioi_tinh
 	and dNgayVaoLam = @ngay_vao_lam and fLuongCoBan = @luong_co_ban and fPhuCap = @phu_cap
+
+	-- tim dia chi nhan vien
+	alter proc tim_dia_chi_nv
+	as
+	select iMaNV as [Mã nhân viên], sTenNV as [Họ và tên], sDiaChi as [Địa chỉ], 
+	dNgaySinh as [Ngày sinh], sGioiTinh as [Giới tính], fLuongCoBan as [Lương cơ bản]
+	from tblNhanVien where sDiaChi like N'%Hà Nội%'
+	exec tim_dia_chi_nv @diachi = N'Hà Nội'
 
 	-- xem khach hang
 	create proc xem_kh
