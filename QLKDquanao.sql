@@ -70,7 +70,6 @@ GO
  (
 	iSoHD INT REFERENCES dbo.tblDonDatHang(iSoHD),
 	sMaHang VARCHAR(20) REFERENCES dbo.tblMatHang(sMaHang),
-	fGiaBan FLOAT,
 	iSoLuongMua INT,
 	fMucGiamGia FLOAT,
 	CONSTRAINT pk_chitietdathang PRIMARY KEY (iSoHD,sMaHang)
@@ -107,7 +106,7 @@ INSERT INTO dbo.tblNhaCungCap VALUES
 	(101, N'Taobao', N'Nhập hàng Taobao', N'Hà Nội', '0334455667'), 
 	(102, N'Lazada', N'Nhập hàng Lazada', N'Đà Nẵng', '0334455668'),
 	(103, N'Shopee', N'Nhập hàng Shopee', N'Hải Phòng', '0334455669'),
-	(104, N'Tiki', N'Nhập hàng Tiki', N'TP. Hồ Chí Minh', '0334455670'	)
+	(104, N'Tiki', N'Nhập hàng Tiki', N'TP. Hồ Chí Minh', '0334455670')
 	GO
 --tblKhachHang
 INSERT INTO dbo.tblKhachHang VALUES
@@ -168,17 +167,17 @@ INSERT INTO dbo.tblDonDatHang VALUES
 	GO
 --tblChiTietDatHang
 INSERT INTO dbo.tblChiTietDatHang VALUES
-	(510, 'MH02', 150000, 1, 0),
-	(510, 'MH06', 250000, 1, 0),
-	(510, 'MH07', 300000, 1, 0),
-	(520, 'MH01', 100000, 2, 0),
-	(520, 'MH09', 140000, 1, 0),
-	(530, 'MH07', 300000, 1, 0),
-	(540, 'MH03', 120000, 1, 0),
-	(540, 'MH05', 150000, 1, 0),
-	(550, 'MH04', 180000, 1, 0),
-	(550, 'MH08', 160000, 2, 0),
-	(550, 'MH10', 100000, 3, 0)
+	(510, 'MH02', 1, 0),
+	(510, 'MH06', 1, 0),
+	(510, 'MH07', 1, 0),
+	(520, 'MH01', 2, 0),
+	(520, 'MH09', 1, 0),
+	(530, 'MH07', 1, 0),
+	(540, 'MH03', 1, 0),
+	(540, 'MH05', 1, 0),
+	(550, 'MH04', 1, 0),
+	(550, 'MH08', 2, 0),
+	(550, 'MH10', 3, 0)
 	GO
 	--in bảng
 	select*from tblLoaiHang
@@ -200,6 +199,8 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	GO;
 	
 	-- CREATE PROCEDURE --
+
+	-- NHAN VIEN ---
 	-- xem nhan vien
 	create procedure xem_nv as
 	select iMaNV as [Mã NV], sTenNV as [Họ và tên], sGioiTinh as [Giới tính], sDiaChi as [Địa chỉ], sDienThoai as [Số điện thoại],
@@ -232,6 +233,7 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	sDienThoai=@sdt, dNgaySinh=@ngay_sinh, sGioiTinh=@gioi_tinh, dNgayVaoLam=@ngay_vao_lam,
 	fLuongCoBan=@luong_co_ban, fPhuCap=@phu_cap
 	where iMaNV=@ma_nv
+	GO;
 
 	-- kiem tra nhan vien trung lap
 	create proc kt_nv @ten_nv nvarchar(30), @dia_chi nvarchar(30), 
@@ -242,6 +244,7 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	where sTenNV = @ten_nv and sDiaChi = @dia_chi and sDienThoai = @sdt 
 	and dNgaySinh = @ngay_sinh and sGioiTinh = @gioi_tinh
 	and dNgayVaoLam = @ngay_vao_lam and fLuongCoBan = @luong_co_ban and fPhuCap = @phu_cap
+	GO;
 
 	-- tim dia chi nhan vien
 	alter proc tim_dia_chi_nv
@@ -250,10 +253,106 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	dNgaySinh as [Ngày sinh], sGioiTinh as [Giới tính], fLuongCoBan as [Lương cơ bản]
 	from tblNhanVien where sDiaChi like N'%Hà Nội%'
 	exec tim_dia_chi_nv @diachi = N'Hà Nội'
+	GO;
 
-	-- xem khach hang
-	create proc xem_kh
+	-- NHA CUNG CAP ---
+	-- xem nha cung cap
+	create procedure xem_ncc as
+	select iMaNCC as [Mã NCC], sTenNhaCC as [Tên nhà cung cấp], sTenGiaoDich as [Tên giao dịch], 
+	sDiaChi as [Địa chỉ], sDienThoai as [Số điện thoại]
+	from tblNhaCungCap
+	exec xem_ncc
+	GO;
+
+	-- kiem tra nha cung cap trung lap
+	create proc kt_ncc @ma_ncc int ,@ten_ncc nvarchar(30), @ten_giao_dich nvarchar(50), 
+	@dia_chi nvarchar(50), @sdt char(10)
 	as
-	select iMaKH as [Mã KH], sTenKH as [Họ và tên], sDiaChi as [Địa chỉ], sDienThoai as [Số điện thoại]
+	select * from tblNhaCungCap
+	where iMaNCC=@ma_ncc and sTenNhaCC=@ten_ncc and sTenGiaoDich=@ten_giao_dich and sDiaChi=@dia_chi and sDienThoai=@sdt
+	GO;
+
+	--them nha cung cap
+	create procedure them_ncc @ma_ncc int, @ten_ncc nvarchar(30), 
+	@ten_giao_dich nvarchar(50), @dia_chi nvarchar(50), @sdt char(10)
+	as
+	INSERT INTO tblNhaCungCap(iMaNCC, sTenNhaCC, sTenGiaoDich, sDiaChi, sDienThoai)
+	VALUES (@ma_ncc, @ten_ncc, @ten_giao_dich, @dia_chi, @sdt)
+	GO;
+
+	-- sua nha cung cap
+	create procedure sua_ncc @ma_ncc int, @ten_ncc nvarchar(30), 
+	@ten_giao_dich nvarchar(50), @dia_chi nvarchar(50), @sdt char(10)
+	as
+	UPDATE tblNhaCungCap SET sTenNhaCC=@ten_ncc, sTenGiaoDich=@ten_giao_dich, sDiaChi=@dia_chi, 
+	sDienThoai=@sdt
+	where iMaNCC=@ma_ncc
+	GO;
+
+	-- xoa nha cung cap
+	create procedure xoa_ncc @ma_ncc int
+	as
+	delete from tblNhaCungCap where iMaNCC=@ma_ncc
+	GO;
+
+	--- KHACH HANG ---
+	-- xem khach hang
+	create procedure xemKH as
+	select iMaKH, sTenKH, sDienThoai, sDiaChi 
 	from tblKhachHang
-	exec xem_kh
+	exec xemKH
+	GO;
+
+	--them khach hang
+	create procedure ThemKhachhang (@ma_kh int, @ten_kh nvarchar(30), @dia_chi nvarchar(50), @sdt char(10))
+	as
+	INSERT INTO tblKhachHang (iMaKH, sTenKH, sDiaChi, sDienThoai)
+	VALUES (@ma_kh, @ten_kh,@dia_chi,@sdt)
+	exec ThemKhachhang '120', 'do thi hue', 'hung yen', '0969972712'
+	GO
+
+	-- xoa khach hang
+	create procedure xoa_kh @ma_kh int
+	as
+	delete from tblKhachHang where iMaKH=@ma_kh
+	exec xoa_kh '120'
+	GO
+
+	-- sua khach hang
+	create procedure sua_kh (@ma_kh int, @ten_kh nvarchar(30), @dia_chi nvarchar(50), @sdt char(10))
+	as
+	UPDATE tblKhachHang SET sTenKH=@ten_kh, sDiaChi=@dia_chi, sDienThoai=@sdt
+	where iMaKH=@ma_kh
+
+	-- kiem tra khach hang trung lap
+	create proc kiemtra_kh (@ma_kh int, @ten_kh nvarchar(30), @dia_chi nvarchar(50), @sdt char(10))
+	as
+	select * from tblKhachHang
+	where iMaKH=@ma_kh and sTenKH = @ten_kh and sDiaChi = @dia_chi and sDienThoai = @sdt 
+
+	-- tim dia chi khach hang
+	create proc tim_dia_chi_kh
+	as
+	select iMaKH, sTenKH, sDiaChi
+	from tblKhachHang where sDiaChi like N'%Hà Nội%'
+	exec tim_dia_chi_kh @diachi = N'Hà Nội'
+
+	--- DON DAT HANG ---
+	-- xem don dat hang
+	create procedure xem_ddh as
+	select * from tblDonDatHang
+	exec xem_ddh
+	GO;
+
+	--- CHI TIET DAT HANG ---
+	-- xem chi tiet dat hang bang ma hoa don
+	create procedure xem_ctddh @ma_ddh int
+	as
+	select tblChiTietDatHang.sMaHang, tblMatHang.sTenHang, tblMatHang.fGiaHang, 
+			tblChiTietDatHang.iSoLuongMua, tblChiTietDatHang.fMucGiamGia
+	from  tblChiTietDatHang 
+	inner join tblDonDatHang on  tblChiTietDatHang.iSoHD = tblDonDatHang.iSoHD
+	inner join tblMatHang on tblChiTietDatHang.sMaHang = tblMatHang.sMaHang
+	where tblDonDatHang.iSoHD = @ma_ddh
+	exec xem_ddh
+	GO;
