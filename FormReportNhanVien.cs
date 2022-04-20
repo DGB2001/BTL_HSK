@@ -21,22 +21,13 @@ namespace BTL_HSK
             InitializeComponent();
         }
 
-        //private void rptNhanVien_Load(object sender, EventArgs e)
-        //{
-        //    ReportDocument report = new ReportDocument();
-        //    report.Load(@"D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\Report\ReportNhanVien.rpt");
-        //    //report.RecordSelectionFormula = "{tblNhanVien.sGioiTinh} = 'Nữ'";
-        //    rptNhanVien.ReportSource = report;
-        //    rptNhanVien.Refresh();
-        //    rptNhanVien.Zoom(85);
-        //}
-
         private void FormReportNhanVien_Load(object sender, EventArgs e)
         {
             cbTieude.Items.Add("Danh sách nhân viên");
             cbTieude.Items.Add("Danh sách nhân viên giới tính nam");
             cbTieude.Items.Add("Danh sách nhân viên giới tính nữ");
             cbTieude.Items.Add("Danh sách nhân viên tại Hà Nội");
+            cbTieude.SelectedItem = "Danh sách nhân viên";
         }
 
         private void btnReport_Click(object sender, EventArgs e)

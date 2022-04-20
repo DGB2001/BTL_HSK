@@ -82,17 +82,6 @@ namespace BTL_HSK
             hienDSNV();
         }
 
-        private static int GetAge(DateTime ngaysinh)
-        {
-            DateTime n = DateTime.Now;
-            int age = n.Year - ngaysinh.Year;
-
-            if (n.Month < ngaysinh.Month || (n.Month == ngaysinh.Month && n.Day < ngaysinh.Day))
-                age--;
-
-            return age;
-        }
-
         private static bool checkDuplicate(string hoten, string diachi, string sdt, string ngaysinh, string gioitinh, string ngayvaolam, string luongcoban, string phucap)
         {
             using (SqlConnection cnn = new SqlConnection(connectionString))

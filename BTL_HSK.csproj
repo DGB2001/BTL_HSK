@@ -80,6 +80,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDonDatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDonDatHang.Designer.cs">
+      <DependentUpon>FormDonDatHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKhachHang.Designer.cs">
+      <DependentUpon>FormKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMatHang.Designer.cs">
+      <DependentUpon>FormMatHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +136,15 @@
       <DependentUpon>ReportNhanVien.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="FormDonDatHang.resx">
+      <DependentUpon>FormDonDatHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKhachHang.resx">
+      <DependentUpon>FormKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMatHang.resx">
+      <DependentUpon>FormMatHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormNhaCungCap.resx">
       <DependentUpon>FormNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>

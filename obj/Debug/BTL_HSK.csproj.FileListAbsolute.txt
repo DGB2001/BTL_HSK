@@ -83,3 +83,6 @@ D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.csproj.CopyComplete
 D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.exe
 D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.pdb
 D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.FormReportNhanVien.resources
+D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.FormKhachHang.resources
+D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.FormMatHang.resources
+D:\BaosCode\LAP_TRINH_HSK\BTL_HSK\obj\Debug\BTL_HSK.FormDonDatHang.resources

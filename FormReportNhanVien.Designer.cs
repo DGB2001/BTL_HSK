@@ -53,7 +53,7 @@ namespace BTL_HSK
             this.groupBox1.Size = new System.Drawing.Size(1420, 120);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin báo cáo";
+            this.groupBox1.Text = "Thông tin báo cáo nhân viên";
             // 
             // btnReport
             // 
