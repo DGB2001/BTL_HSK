@@ -35,7 +35,7 @@ namespace BTL_HSK
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             cbMaNV.DataSource = dt;
-            cbMaNV.DisplayMember = "iMaNV";
+            cbMaNV.DisplayMember = "sTenNV";
             cbMaNV.ValueMember = "iMaNV";
         }
 
@@ -47,7 +47,7 @@ namespace BTL_HSK
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             cbMaKH.DataSource = dt;
-            cbMaKH.DisplayMember = "iMaKH";
+            cbMaKH.DisplayMember = "sTenKH";
             cbMaKH.ValueMember = "iMaKH";
         }
 
@@ -103,13 +103,18 @@ namespace BTL_HSK
         {
             //errorCheck.SetError(txtMaNCC, "");
             txtMaHD.Text = dgvDonDatHang.CurrentRow.Cells["iSoHD"].Value.ToString();
-            cbMaNV.SelectedIndex = cbMaNV.FindStringExact(dgvDonDatHang.CurrentRow.Cells["iMaNV"].Value.ToString());
-            cbMaKH.SelectedIndex = cbMaKH.FindStringExact(dgvDonDatHang.CurrentRow.Cells["iMaKH"].Value.ToString());
+            cbMaNV.SelectedValue = dgvDonDatHang.CurrentRow.Cells["iMaNV"].Value.ToString();
+            cbMaKH.SelectedValue = dgvDonDatHang.CurrentRow.Cells["iMaKH"].Value.ToString();
             txtNgayDatHang.Text = dgvDonDatHang.CurrentRow.Cells["dNgayDatHang"].Value.ToString();
             txtNgayGiaoHang.Text = dgvDonDatHang.CurrentRow.Cells["dNgayGiaoHang"].Value.ToString();
             txtTongTien.Text = dgvDonDatHang.CurrentRow.Cells["fTongTienHD"].Value.ToString();
             int ma_ddh = int.Parse(dgvDonDatHang.CurrentRow.Cells["iSoHD"].Value.ToString());
             HienCTDDH(ma_ddh);
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

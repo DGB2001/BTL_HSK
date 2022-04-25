@@ -35,7 +35,6 @@ namespace BTL_HSK
             this.cbLoaiHang = new System.Windows.Forms.ComboBox();
             this.cbNCC = new System.Windows.Forms.ComboBox();
             this.txtGiaHang = new System.Windows.Forms.TextBox();
-            this.txtSoLuong = new System.Windows.Forms.TextBox();
             this.txtTenHang = new System.Windows.Forms.TextBox();
             this.txtMaHang = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,12 +52,20 @@ namespace BTL_HSK
             this.btnThem = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvMatHang = new System.Windows.Forms.DataGridView();
+            this.sMaHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTenHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iMaNCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sMaLoaiHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fGiaHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorCheck = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtSoLuong = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatHang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorCheck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoLuong)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,10 +80,10 @@ namespace BTL_HSK
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtSoLuong);
             this.groupBox1.Controls.Add(this.cbLoaiHang);
             this.groupBox1.Controls.Add(this.cbNCC);
             this.groupBox1.Controls.Add(this.txtGiaHang);
-            this.groupBox1.Controls.Add(this.txtSoLuong);
             this.groupBox1.Controls.Add(this.txtTenHang);
             this.groupBox1.Controls.Add(this.txtMaHang);
             this.groupBox1.Controls.Add(this.label7);
@@ -89,15 +96,16 @@ namespace BTL_HSK
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(806, 262);
+            this.groupBox1.Size = new System.Drawing.Size(1000, 250);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin mặt hàng";
             // 
             // cbLoaiHang
             // 
+            this.cbLoaiHang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoaiHang.FormattingEnabled = true;
-            this.cbLoaiHang.Location = new System.Drawing.Point(556, 49);
+            this.cbLoaiHang.Location = new System.Drawing.Point(660, 37);
             this.cbLoaiHang.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbLoaiHang.Name = "cbLoaiHang";
             this.cbLoaiHang.Size = new System.Drawing.Size(160, 28);
@@ -105,8 +113,9 @@ namespace BTL_HSK
             // 
             // cbNCC
             // 
+            this.cbNCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNCC.FormattingEnabled = true;
-            this.cbNCC.Location = new System.Drawing.Point(172, 192);
+            this.cbNCC.Location = new System.Drawing.Point(200, 167);
             this.cbNCC.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbNCC.Name = "cbNCC";
             this.cbNCC.Size = new System.Drawing.Size(175, 28);
@@ -114,40 +123,35 @@ namespace BTL_HSK
             // 
             // txtGiaHang
             // 
-            this.txtGiaHang.Location = new System.Drawing.Point(556, 192);
+            this.txtGiaHang.Location = new System.Drawing.Point(660, 170);
             this.txtGiaHang.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtGiaHang.Name = "txtGiaHang";
             this.txtGiaHang.Size = new System.Drawing.Size(160, 26);
             this.txtGiaHang.TabIndex = 9;
-            // 
-            // txtSoLuong
-            // 
-            this.txtSoLuong.Location = new System.Drawing.Point(556, 124);
-            this.txtSoLuong.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtSoLuong.Name = "txtSoLuong";
-            this.txtSoLuong.Size = new System.Drawing.Size(160, 26);
-            this.txtSoLuong.TabIndex = 8;
+            this.txtGiaHang.Validating += new System.ComponentModel.CancelEventHandler(this.txtGiaHang_Validating);
             // 
             // txtTenHang
             // 
-            this.txtTenHang.Location = new System.Drawing.Point(172, 130);
+            this.txtTenHang.Location = new System.Drawing.Point(200, 102);
             this.txtTenHang.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTenHang.Name = "txtTenHang";
             this.txtTenHang.Size = new System.Drawing.Size(175, 26);
             this.txtTenHang.TabIndex = 7;
+            this.txtTenHang.Validating += new System.ComponentModel.CancelEventHandler(this.txtTenHang_Validating);
             // 
             // txtMaHang
             // 
-            this.txtMaHang.Location = new System.Drawing.Point(172, 55);
+            this.txtMaHang.Location = new System.Drawing.Point(200, 37);
             this.txtMaHang.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaHang.Name = "txtMaHang";
             this.txtMaHang.Size = new System.Drawing.Size(175, 26);
             this.txtMaHang.TabIndex = 6;
+            this.txtMaHang.Validating += new System.ComponentModel.CancelEventHandler(this.txtMaHang_Validating);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(422, 201);
+            this.label7.Location = new System.Drawing.Point(550, 173);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 20);
             this.label7.TabIndex = 5;
@@ -156,7 +160,7 @@ namespace BTL_HSK
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(422, 130);
+            this.label6.Location = new System.Drawing.Point(550, 105);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 20);
             this.label6.TabIndex = 4;
@@ -165,7 +169,7 @@ namespace BTL_HSK
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(422, 55);
+            this.label5.Location = new System.Drawing.Point(550, 40);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 20);
             this.label5.TabIndex = 3;
@@ -174,7 +178,7 @@ namespace BTL_HSK
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 196);
+            this.label4.Location = new System.Drawing.Point(70, 170);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 20);
             this.label4.TabIndex = 2;
@@ -183,7 +187,7 @@ namespace BTL_HSK
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 130);
+            this.label3.Location = new System.Drawing.Point(70, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 20);
             this.label3.TabIndex = 1;
@@ -192,7 +196,7 @@ namespace BTL_HSK
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 55);
+            this.label2.Location = new System.Drawing.Point(70, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 20);
             this.label2.TabIndex = 0;
@@ -206,83 +210,89 @@ namespace BTL_HSK
             this.groupBox2.Controls.Add(this.btnXoa);
             this.groupBox2.Controls.Add(this.btnSua);
             this.groupBox2.Controls.Add(this.btnThem);
-            this.groupBox2.Location = new System.Drawing.Point(879, 110);
+            this.groupBox2.Location = new System.Drawing.Point(1070, 60);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(351, 262);
+            this.groupBox2.Size = new System.Drawing.Size(300, 250);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chức năng";
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(202, 189);
+            this.btnReset.Location = new System.Drawing.Point(176, 98);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(84, 29);
+            this.btnReset.Size = new System.Drawing.Size(100, 40);
             this.btnReset.TabIndex = 5;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(202, 122);
+            this.btnThoat.Location = new System.Drawing.Point(176, 33);
             this.btnThoat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(84, 29);
+            this.btnThoat.Size = new System.Drawing.Size(100, 40);
             this.btnThoat.TabIndex = 4;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Location = new System.Drawing.Point(202, 40);
+            this.btnTimKiem.Location = new System.Drawing.Point(176, 163);
             this.btnTimKiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(84, 29);
+            this.btnTimKiem.Size = new System.Drawing.Size(100, 40);
             this.btnTimKiem.TabIndex = 3;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(27, 189);
+            this.btnXoa.Location = new System.Drawing.Point(40, 163);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(84, 29);
+            this.btnXoa.Size = new System.Drawing.Size(100, 40);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(27, 122);
+            this.btnSua.Location = new System.Drawing.Point(40, 98);
             this.btnSua.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(106, 35);
+            this.btnSua.Size = new System.Drawing.Size(100, 40);
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Cập nhật";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(27, 40);
+            this.btnThem.Location = new System.Drawing.Point(40, 33);
             this.btnThem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(84, 29);
+            this.btnThem.Size = new System.Drawing.Size(100, 40);
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvMatHang);
-            this.groupBox3.Location = new System.Drawing.Point(35, 421);
+            this.groupBox3.Location = new System.Drawing.Point(50, 320);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox3.Size = new System.Drawing.Size(1195, 320);
+            this.groupBox3.Size = new System.Drawing.Size(1320, 370);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh sách mặt hàng";
@@ -291,25 +301,91 @@ namespace BTL_HSK
             // 
             this.dgvMatHang.AllowUserToAddRows = false;
             this.dgvMatHang.AllowUserToDeleteRows = false;
+            this.dgvMatHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMatHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMatHang.Location = new System.Drawing.Point(7, 26);
+            this.dgvMatHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sMaHang,
+            this.sTenHang,
+            this.iMaNCC,
+            this.sMaLoaiHang,
+            this.fSoLuong,
+            this.fGiaHang});
+            this.dgvMatHang.Location = new System.Drawing.Point(5, 20);
             this.dgvMatHang.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvMatHang.MultiSelect = false;
             this.dgvMatHang.Name = "dgvMatHang";
             this.dgvMatHang.ReadOnly = true;
             this.dgvMatHang.RowHeadersWidth = 51;
             this.dgvMatHang.RowTemplate.Height = 24;
-            this.dgvMatHang.Size = new System.Drawing.Size(1181, 255);
+            this.dgvMatHang.Size = new System.Drawing.Size(1310, 340);
             this.dgvMatHang.TabIndex = 0;
+            this.dgvMatHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatHang_CellClick);
+            // 
+            // sMaHang
+            // 
+            this.sMaHang.DataPropertyName = "sMaHang";
+            this.sMaHang.HeaderText = "Mã hàng";
+            this.sMaHang.MinimumWidth = 8;
+            this.sMaHang.Name = "sMaHang";
+            this.sMaHang.ReadOnly = true;
+            // 
+            // sTenHang
+            // 
+            this.sTenHang.DataPropertyName = "sTenHang";
+            this.sTenHang.HeaderText = "Tên hàng";
+            this.sTenHang.MinimumWidth = 8;
+            this.sTenHang.Name = "sTenHang";
+            this.sTenHang.ReadOnly = true;
+            // 
+            // iMaNCC
+            // 
+            this.iMaNCC.DataPropertyName = "iMaNCC";
+            this.iMaNCC.HeaderText = "Mã nhà cung cấp";
+            this.iMaNCC.MinimumWidth = 8;
+            this.iMaNCC.Name = "iMaNCC";
+            this.iMaNCC.ReadOnly = true;
+            // 
+            // sMaLoaiHang
+            // 
+            this.sMaLoaiHang.DataPropertyName = "sMaLoaiHang";
+            this.sMaLoaiHang.HeaderText = "Mã loại hàng";
+            this.sMaLoaiHang.MinimumWidth = 8;
+            this.sMaLoaiHang.Name = "sMaLoaiHang";
+            this.sMaLoaiHang.ReadOnly = true;
+            // 
+            // fSoLuong
+            // 
+            this.fSoLuong.DataPropertyName = "fSoLuong";
+            this.fSoLuong.HeaderText = "Số lượng";
+            this.fSoLuong.MinimumWidth = 8;
+            this.fSoLuong.Name = "fSoLuong";
+            this.fSoLuong.ReadOnly = true;
+            // 
+            // fGiaHang
+            // 
+            this.fGiaHang.DataPropertyName = "fGiaHang";
+            this.fGiaHang.HeaderText = "Giá hàng";
+            this.fGiaHang.MinimumWidth = 8;
+            this.fGiaHang.Name = "fGiaHang";
+            this.fGiaHang.ReadOnly = true;
             // 
             // errorCheck
             // 
             this.errorCheck.ContainerControl = this;
             // 
+            // txtSoLuong
+            // 
+            this.txtSoLuong.Location = new System.Drawing.Point(660, 105);
+            this.txtSoLuong.Name = "txtSoLuong";
+            this.txtSoLuong.Size = new System.Drawing.Size(160, 26);
+            this.txtSoLuong.TabIndex = 12;
+            this.txtSoLuong.Validating += new System.ComponentModel.CancelEventHandler(this.txtSoLuong_Validating_1);
+            // 
             // FormMatHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 644);
+            this.ClientSize = new System.Drawing.Size(1420, 700);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -318,12 +394,14 @@ namespace BTL_HSK
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMatHang";
             this.Text = "FormMatHang";
+            this.Load += new System.EventHandler(this.FormMatHang_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatHang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorCheck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoLuong)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -335,7 +413,6 @@ namespace BTL_HSK
         private System.Windows.Forms.ComboBox cbLoaiHang;
         private System.Windows.Forms.ComboBox cbNCC;
         private System.Windows.Forms.TextBox txtGiaHang;
-        private System.Windows.Forms.TextBox txtSoLuong;
         private System.Windows.Forms.TextBox txtTenHang;
         private System.Windows.Forms.TextBox txtMaHang;
         private System.Windows.Forms.Label label7;
@@ -354,5 +431,12 @@ namespace BTL_HSK
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvMatHang;
         private System.Windows.Forms.ErrorProvider errorCheck;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sMaHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTenHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iMaNCC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sMaLoaiHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fSoLuong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fGiaHang;
+        private System.Windows.Forms.NumericUpDown txtSoLuong;
     }
 }

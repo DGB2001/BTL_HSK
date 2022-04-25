@@ -246,6 +246,7 @@ namespace BTL_HSK
             // 
             this.dataGridView_KH.AllowUserToAddRows = false;
             this.dataGridView_KH.AllowUserToDeleteRows = false;
+            this.dataGridView_KH.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_KH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_KH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.makh,
@@ -266,7 +267,6 @@ namespace BTL_HSK
             this.makh.HeaderText = "Mã khách hàng";
             this.makh.MinimumWidth = 8;
             this.makh.Name = "makh";
-            this.makh.Width = 160;
             // 
             // tenkh
             // 
@@ -274,7 +274,6 @@ namespace BTL_HSK
             this.tenkh.HeaderText = "Tên khách hàng";
             this.tenkh.MinimumWidth = 8;
             this.tenkh.Name = "tenkh";
-            this.tenkh.Width = 200;
             // 
             // diachikh
             // 
@@ -282,7 +281,6 @@ namespace BTL_HSK
             this.diachikh.HeaderText = "Địa chỉ";
             this.diachikh.MinimumWidth = 8;
             this.diachikh.Name = "diachikh";
-            this.diachikh.Width = 250;
             // 
             // sdtkh
             // 
@@ -290,7 +288,6 @@ namespace BTL_HSK
             this.sdtkh.HeaderText = "Số điện thoại";
             this.sdtkh.MinimumWidth = 8;
             this.sdtkh.Name = "sdtkh";
-            this.sdtkh.Width = 170;
             // 
             // errorCheck
             // 

@@ -35,6 +35,7 @@ namespace BTL_HSK
 
         private void FormNhanVien_Load(object sender, EventArgs e)
         {
+            txtHoten.Focus();
             rdbNam.Checked = true;
             hienDSNV();
         }
@@ -79,6 +80,7 @@ namespace BTL_HSK
             txtNgayvaolam.Text = "";
             txtLuongcoban.Text = "";
             txtPhucap.Text = "";
+            txtHoten.Focus();
             hienDSNV();
         }
 

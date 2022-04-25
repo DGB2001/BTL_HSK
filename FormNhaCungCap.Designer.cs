@@ -263,6 +263,7 @@ namespace BTL_HSK
             // 
             this.dgvNhaCungCap.AllowUserToAddRows = false;
             this.dgvNhaCungCap.AllowUserToDeleteRows = false;
+            this.dgvNhaCungCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNhaCungCap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNhaCungCap.Location = new System.Drawing.Point(5, 20);
             this.dgvNhaCungCap.Name = "dgvNhaCungCap";

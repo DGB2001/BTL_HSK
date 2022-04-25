@@ -255,6 +255,52 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	exec tim_dia_chi_nv @diachi = N'Hà Nội'
 	GO;
 
+	--Số tiền mà nhân viên bán được và số hóa đơn đã xử lý 
+	ALTER PROC spthongkebanhang_nhanvien (@many int) 
+	AS BEGIN 
+	SELECT tblDonDatHang.iMaNV,sTenNV,COUNT(tblDonDatHang.iSoHD) AS [So Hoa Don], 
+	SUM(iSoLuongMua*fGiaHang-iSoLuongMua*fGiaHang*fMucGiamGia) AS [Tong tien] 
+	FROM dbo.tblNhanVien,dbo.tblDonDatHang,dbo.tblChiTietDatHang, tblMatHang 
+	WHERE dbo.tblNhanVien.iMaNV = dbo.tblDonDatHang.iMaNV 
+	AND tblDonDatHang.iSoHD = tblChiTietDatHang.iSoHD 
+	AND tblMatHang.sMaHang = tblChiTietDatHang.sMaHang
+	AND tblNhanVien.iMaNV = @many 
+	GROUP BY tblNhanVien.sTenNV, tblDonDatHang.iMaNV
+	END
+	EXEC spthongkebanhang_nhanvien 1
+
+	create procedure thongkedoanhsobanhang_thang (@thang int, @nam int)
+	as begin
+	select tblDonDatHang.iMaNV, tblNhanVien.sTenNV, count(tblDonDatHang.iMaNV) as [So hoa don]
+	from tblDonDatHang inner join tblNhanVien on tblDonDatHang.iMaNV=tblNhanVien.iMaNV
+	where tblDonDatHang.iMaNV=1
+	group by tblDonDatHang.iMaNV, tblNhanVien.sTenNV
+
+	 --Tăng lương cơ bản cho nhân viên (x %) có lượng bán ra lớn hơn chỉ tiêu của một năm 
+	CREATE PROC sptangluongcoban_nhanvien (@chitieu int, @nam int, @phantram float) 
+	AS 
+	BEGIN UPDATE dbo.tblNhanVien 
+	SET fLuongCoBan = fLuongCoBan + fLuongCoBan * @phantram 
+	WHERE iMaNV IN (SELECT dbo.tblNhanVien.iMaNV 
+	FROM dbo.tblNhanVien, dbo.tblDonDatHang, dbo.tblChiTietDatHang 
+	WHERE tblDonDatHang.iMaNV = tblNhanVien.iMaNV 
+	AND tblDonDatHang.iSoHD = tblChiTietDatHang.iSoHD 
+	AND YEAR(dNgayDatHang) = @nam 
+	GROUP BY tblNhanVien.iMaNV 
+	HAVING SUM (iSoLuongMua) > @chitieu)
+	EXEC sptangluongcoban_nhanvien 11,2020,0.1
+
+	 -- Tong tien ban dc trong 1 thang
+	CREATE PROC sptongtienhangban_thang (@thang int, @nam int) AS BEGIN 
+	SELECT @thang AS[Thang], SUM (fGiaBan*iSoLuongMua - fGiaBan*iSoLuongMua*fMucGiamGia) AS [Tong tien] 
+	FROM dbo.tblDonDatHang, dbo.tblChiTietDatHang WHERE tblDonDatHang.iSoHD = tblDonDatHang.iSoHD 
+	AND MONTH(dNgayGiao Hang) = @thang 
+	AND YEAR(dNgayGiao Hang) = @nam 
+	GROUP BY MONTH(dNgayGiao Hang), YEAR(dNgayGiao Hang) 
+	END EXEC sptongtienhangban_thang 3,2020
+
+
+
 	-- NHA CUNG CAP ---
 	-- xem nha cung cap
 	create procedure xem_ncc as
@@ -323,6 +369,7 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	as
 	UPDATE tblKhachHang SET sTenKH=@ten_kh, sDiaChi=@dia_chi, sDienThoai=@sdt
 	where iMaKH=@ma_kh
+	GO;
 
 	-- kiem tra khach hang trung lap
 	create proc kiemtra_kh (@ma_kh int, @ten_kh nvarchar(30), @dia_chi nvarchar(50), @sdt char(10))
@@ -336,6 +383,51 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	select iMaKH, sTenKH, sDiaChi
 	from tblKhachHang where sDiaChi like N'%Hà Nội%'
 	exec tim_dia_chi_kh @diachi = N'Hà Nội'
+	GO;
+
+	--- MAT HANG ---
+	-- xem mat hang
+	alter procedure xem_mh 
+	as
+	select * from tblMatHang where fSoLuong>0
+	exec xemKH
+	GO;
+
+	-- kiem tra mat hang trung lap
+	create proc kt_mh @ma_mh nvarchar(20), @ten_mh nvarchar(30), @ma_ncc int, @ma_loaihang nvarchar(20)
+	as
+	select * from tblMatHang
+	where sMaHang=@ma_mh and sTenHang=@ten_mh and iMaNCC=@ma_ncc and sMaLoaiHang=@ma_loaihang
+	GO;
+
+	-- them mat hang
+	create procedure them_mh @ma_mh nvarchar(20), @ten_mh nvarchar(30), @ma_ncc int, @ma_loaihang nvarchar(20),
+					@so_luong float, @gia_hang float		
+	as
+	INSERT INTO tblMatHang (sMaHang, sTenHang, iMaNCC, sMaLoaiHang, fSoLuong, fGiaHang)
+	VALUES (@ma_mh, @ten_mh, @ma_ncc, @ma_loaihang, @so_luong, @gia_hang)
+	GO;
+
+	-- sua mat hang
+	create procedure sua_mh @ma_mh nvarchar(20), @ten_mh nvarchar(30), @ma_ncc int, @ma_loaihang nvarchar(20),
+					@so_luong float, @gia_hang float	
+	as
+	UPDATE tblMatHang SET sTenHang=@ten_mh, iMaNCC=@ma_ncc, sMaLoaiHang=@ma_loaihang, fSoLuong=@so_luong, fGiaHang=@gia_hang 
+	WHERE sMaHang=@ma_mh
+	GO;
+
+	-- xoa mat hang
+	create procedure xoa_mh @ma_mh nvarchar(20)
+	as
+	delete from tblMatHang where sMaHang=@ma_mh
+	GO;
+
+	-- cap nhat so luong mat hang
+	create procedure capnhat_sl_mh @ma_mh nvarchar(20), @so_luong_mua float
+	as
+	UPDATE tblMatHang SET fSoLuong= fSoLuong-@so_luong_mua 
+	WHERE sMaHang=@ma_mh
+	GO;
 
 	--- DON DAT HANG ---
 	-- xem don dat hang
@@ -343,6 +435,35 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	select * from tblDonDatHang
 	exec xem_ddh
 	GO;
+
+	-- them don dat hang
+	create procedure them_ddh @so_hd int, @ma_nv int, @ma_kh int, @ngay_dat_hang datetime, 
+							@ngay_giao_hang datetime
+	as
+	BEGIN
+	INSERT INTO tblDonDatHang
+	VALUES (@so_hd, @ma_nv, @ma_kh, @ngay_dat_hang, @ngay_giao_hang, 1);
+	END
+	exec them_ddh @so_hd=560, @ma_nv=1, @ma_kh=111, @ngay_dat_hang = '2021-12-18', 
+							@ngay_giao_hang = '2022-01-01'
+	GO;
+
+	-- them tong tien cho don dat hang
+	alter proc them_tongtienddh @so_hd int, @tong_tien float
+	as
+	BEGIN
+	set @tong_tien = 
+	(select sum(tblChiTietDatHang.iSoLuongMua*tblMatHang.fGiaHang) as [Thành tiền]
+	from tblChiTietDatHang inner join tblMatHang on tblChiTietDatHang.sMaHang = tblMatHang.sMaHang
+	inner join tblDonDatHang on tblChiTietDatHang.iSoHD=tblDonDatHang.iSoHD
+	where tblDonDatHang.iSoHD = @so_hd);
+
+	UPDATE tblDonDatHang SET fTongTienHD=@tong_tien where iSoHD=@so_hd
+	SELECT fTongTienHD from tblDonDatHang where iSoHD=@so_hd
+	END
+	exec them_tongtienddh @so_hd=560, @tong_tien=1
+	select * from tblDonDatHang
+	select * from tblChiTietDatHang
 
 	--- CHI TIET DAT HANG ---
 	-- xem chi tiet dat hang bang ma hoa don
@@ -354,5 +475,41 @@ INSERT INTO dbo.tblChiTietDatHang VALUES
 	inner join tblDonDatHang on  tblChiTietDatHang.iSoHD = tblDonDatHang.iSoHD
 	inner join tblMatHang on tblChiTietDatHang.sMaHang = tblMatHang.sMaHang
 	where tblDonDatHang.iSoHD = @ma_ddh
-	exec xem_ddh
+	exec xem_ctddh
 	GO;
+
+	-- them chi tiet dat hang
+	create procedure them_ctddh @so_hd int, @ma_mh nvarchar(15), @so_luong_mua int	
+	as
+	INSERT INTO tblChiTietDatHang VALUES (@so_hd, @ma_mh, @so_luong_mua, 0);
+
+	exec them_ctddh @so_hd=560, @ma_mh=N'MH01', @so_luong_mua=5
+	GO;
+
+
+	--- DON NHAP KHO ---
+	--xem donnk
+	create procedure xem_donnk as
+	select *
+	from tblDonNhapKho
+	exec xem_donnk
+	
+	--them don nk
+	create procedure them_dnk @snk int, @ma_nv int, 
+	@ngaynhaphang date, @soluongnhap float, @gianhap float
+	as
+	INSERT INTO tblDonNhapKho(iSoNK, iMaNV, dNgayNhapHang, fSoLuongNhap, fGiaNhap)
+	VALUES (@snk,@ma_nv,@ngaynhaphang,@soluongnhap, @gianhap)
+	GO
+	select * from tblDonNhapKho
+	-- xoa donnk
+	create procedure xoa_donnk @ma_dnk int
+	as
+	delete from tblDonNhapKho where iSoNK=@ma_dnk
+
+	--sua donnk
+	create procedure sua_donnk @snk int, @ma_nv int, 
+	@ngaynhaphang date, @soluongnhap float, @gianhap float
+	as 
+	UPDATE tblDonNhapKho SET iMaNV=@ma_nv, dNgayNhapHang=@ngaynhaphang, fSoLuongNhap=@soluongnhap, fGiaNhap= @gianhap
+	where iSoNK=@snk

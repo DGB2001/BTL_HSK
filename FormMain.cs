@@ -52,6 +52,8 @@ namespace BTL_HSK
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //timer1.Stop();
+            //if (MessageBox.Show("Bạn đã hoạt động " + label3.Text + " giây", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             if (MessageBox.Show("Bạn chắc chắn muốn thoát?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 e.Cancel = false;
@@ -94,5 +96,45 @@ namespace BTL_HSK
             panelMain.Controls.Add(formDonDatHang);
             formDonDatHang.Show();
         }
+
+        private void muaHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMuaHang formMuaHang = new FormMuaHang();
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formMuaHang.TopLevel = false;
+            formMuaHang.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formMuaHang);
+            formMuaHang.Show();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            //timer1.Start();
+            FormMuaHang formMuaHang = new FormMuaHang();
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formMuaHang.TopLevel = false;
+            formMuaHang.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formMuaHang);
+            formMuaHang.Show();
+        }
+
+        private void đơnNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDonNhapKho formDonNhapKho = new FormDonNhapKho();
+            panelMain.Show();
+            panelMain.Controls.Clear();
+            formDonNhapKho.TopLevel = false;
+            formDonNhapKho.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(formDonNhapKho);
+            formDonNhapKho.Show();
+        }
+        //int i = 0;
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    i++;
+        //    label3.Text = i.ToString();
+        //}
     }
 }

@@ -29,6 +29,7 @@ namespace BTL_HSK
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.txtNguoibaocao = new System.Windows.Forms.TextBox();
@@ -37,8 +38,10 @@ namespace BTL_HSK
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rptNhanVien = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.errorCheck = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorCheck)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -71,6 +74,7 @@ namespace BTL_HSK
             this.txtNguoibaocao.Name = "txtNguoibaocao";
             this.txtNguoibaocao.Size = new System.Drawing.Size(217, 26);
             this.txtNguoibaocao.TabIndex = 3;
+            this.txtNguoibaocao.Validating += new System.ComponentModel.CancelEventHandler(this.txtNguoibaocao_Validating);
             // 
             // label2
             // 
@@ -83,6 +87,7 @@ namespace BTL_HSK
             // 
             // cbTieude
             // 
+            this.cbTieude.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTieude.FormattingEnabled = true;
             this.cbTieude.Location = new System.Drawing.Point(143, 51);
             this.cbTieude.Name = "cbTieude";
@@ -119,6 +124,10 @@ namespace BTL_HSK
             this.rptNhanVien.Size = new System.Drawing.Size(1414, 555);
             this.rptNhanVien.TabIndex = 0;
             // 
+            // errorCheck
+            // 
+            this.errorCheck.ContainerControl = this;
+            // 
             // FormReportNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -133,6 +142,7 @@ namespace BTL_HSK
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorCheck)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +157,6 @@ namespace BTL_HSK
         private System.Windows.Forms.TextBox txtNguoibaocao;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbTieude;
+        private System.Windows.Forms.ErrorProvider errorCheck;
     }
 }

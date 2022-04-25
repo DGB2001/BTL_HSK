@@ -107,6 +107,7 @@ namespace BTL_HSK
             // 
             this.dgvDonDatHang.AllowUserToAddRows = false;
             this.dgvDonDatHang.AllowUserToDeleteRows = false;
+            this.dgvDonDatHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDonDatHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDonDatHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iSoHD,
@@ -130,7 +131,7 @@ namespace BTL_HSK
             this.iSoHD.HeaderText = "Mã HĐ";
             this.iSoHD.MinimumWidth = 8;
             this.iSoHD.Name = "iSoHD";
-            this.iSoHD.Width = 150;
+            this.iSoHD.ReadOnly = true;
             // 
             // iMaNV
             // 
@@ -138,7 +139,7 @@ namespace BTL_HSK
             this.iMaNV.HeaderText = "Mã NV";
             this.iMaNV.MinimumWidth = 8;
             this.iMaNV.Name = "iMaNV";
-            this.iMaNV.Width = 150;
+            this.iMaNV.ReadOnly = true;
             // 
             // iMaKH
             // 
@@ -146,7 +147,7 @@ namespace BTL_HSK
             this.iMaKH.HeaderText = "Mã KH";
             this.iMaKH.MinimumWidth = 8;
             this.iMaKH.Name = "iMaKH";
-            this.iMaKH.Width = 150;
+            this.iMaKH.ReadOnly = true;
             // 
             // dNgayDatHang
             // 
@@ -154,7 +155,7 @@ namespace BTL_HSK
             this.dNgayDatHang.HeaderText = "Ngày đặt hàng";
             this.dNgayDatHang.MinimumWidth = 8;
             this.dNgayDatHang.Name = "dNgayDatHang";
-            this.dNgayDatHang.Width = 160;
+            this.dNgayDatHang.ReadOnly = true;
             // 
             // dNgayGiaoHang
             // 
@@ -162,7 +163,7 @@ namespace BTL_HSK
             this.dNgayGiaoHang.HeaderText = "Ngày giao hàng";
             this.dNgayGiaoHang.MinimumWidth = 8;
             this.dNgayGiaoHang.Name = "dNgayGiaoHang";
-            this.dNgayGiaoHang.Width = 160;
+            this.dNgayGiaoHang.ReadOnly = true;
             // 
             // fTongTienHD
             // 
@@ -170,7 +171,7 @@ namespace BTL_HSK
             this.fTongTienHD.HeaderText = "Tổng tiền";
             this.fTongTienHD.MinimumWidth = 8;
             this.fTongTienHD.Name = "fTongTienHD";
-            this.fTongTienHD.Width = 150;
+            this.fTongTienHD.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -186,6 +187,7 @@ namespace BTL_HSK
             // 
             this.dgvChiTietDatHang.AllowUserToAddRows = false;
             this.dgvChiTietDatHang.AllowUserToDeleteRows = false;
+            this.dgvChiTietDatHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChiTietDatHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChiTietDatHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sMaHang,
@@ -207,7 +209,7 @@ namespace BTL_HSK
             this.sMaHang.HeaderText = "Mã sản phẩm";
             this.sMaHang.MinimumWidth = 8;
             this.sMaHang.Name = "sMaHang";
-            this.sMaHang.Width = 140;
+            this.sMaHang.ReadOnly = true;
             // 
             // sTenHang
             // 
@@ -215,7 +217,7 @@ namespace BTL_HSK
             this.sTenHang.HeaderText = "Tên sản phẩm";
             this.sTenHang.MinimumWidth = 8;
             this.sTenHang.Name = "sTenHang";
-            this.sTenHang.Width = 150;
+            this.sTenHang.ReadOnly = true;
             // 
             // fGiaHang
             // 
@@ -223,7 +225,7 @@ namespace BTL_HSK
             this.fGiaHang.HeaderText = "Giá bán";
             this.fGiaHang.MinimumWidth = 8;
             this.fGiaHang.Name = "fGiaHang";
-            this.fGiaHang.Width = 150;
+            this.fGiaHang.ReadOnly = true;
             // 
             // iSoLuongMua
             // 
@@ -231,7 +233,7 @@ namespace BTL_HSK
             this.iSoLuongMua.HeaderText = "Số lượng mua";
             this.iSoLuongMua.MinimumWidth = 8;
             this.iSoLuongMua.Name = "iSoLuongMua";
-            this.iSoLuongMua.Width = 150;
+            this.iSoLuongMua.ReadOnly = true;
             // 
             // fMucGiamGia
             // 
@@ -239,7 +241,7 @@ namespace BTL_HSK
             this.fMucGiamGia.HeaderText = "Mức giảm giá";
             this.fMucGiamGia.MinimumWidth = 8;
             this.fMucGiamGia.Name = "fMucGiamGia";
-            this.fMucGiamGia.Width = 150;
+            this.fMucGiamGia.ReadOnly = true;
             // 
             // groupBox3
             // 
@@ -425,6 +427,7 @@ namespace BTL_HSK
             this.btnSua.TabIndex = 0;
             this.btnSua.Text = "Cập nhật";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // groupBox5
             // 
