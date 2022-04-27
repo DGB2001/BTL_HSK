@@ -76,7 +76,7 @@ namespace BTL_HSK
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             cbMaHang.DataSource = dt;
-            cbMaHang.DisplayMember = "sMaHang";
+            cbMaHang.DisplayMember = "sTenHang";
             cbMaHang.ValueMember = "sMaHang";
         }
 

@@ -28,7 +28,6 @@ namespace BTL_HSK
             cbTieude.Items.Add("Danh sách nhân viên giới tính nam");
             cbTieude.Items.Add("Danh sách nhân viên giới tính nữ");
             cbTieude.Items.Add("Danh sách nhân viên tại Hà Nội");
-            cbTieude.Items.Add("Danh sách nhân viên đạt doanh thu trên 100000 trong tháng ...");
             cbTieude.SelectedItem = "Danh sách nhân viên";
             txtNguoibaocao.Focus();
         }

@@ -115,6 +115,17 @@ namespace BTL_HSK
             }
         }
 
+        private static int GetAge(DateTime birthDate)
+        {
+            DateTime n = DateTime.Now;
+            int age = n.Year - birthDate.Year;
+
+            if (n.Month < birthDate.Month || (n.Month == birthDate.Month && n.Day < birthDate.Day))
+                age--;
+
+            return age;
+        }
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             if (check == true)
@@ -122,6 +133,7 @@ namespace BTL_HSK
                 string gioi_tinh = "";
                 if (rdbNam.Checked) gioi_tinh = "Nam";
                 else gioi_tinh = "Nữ";
+                int tuoi = GetAge(DateTime.Parse(txtNgaysinh.Text));
                 SqlConnection cnn = new SqlConnection(connectionString);
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand();
@@ -139,6 +151,22 @@ namespace BTL_HSK
                 if (checkDuplicate(txtHoten.Text, txtDiachi.Text, txtSodienthoai.Text, txtNgaysinh.Text, gioi_tinh, txtNgayvaolam.Text, txtLuongcoban.Text, txtPhucap.Text))
                 {
                     MessageBox.Show("Nhân viên đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if(tuoi < 18)
+                {
+                    MessageBox.Show("Nhân viên phải đủ 18 tuổi trở lên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (tuoi > 55 && gioi_tinh=="Nữ")
+                {
+                    MessageBox.Show("Tuổi tối đa của nhân viên nữ là 55", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (tuoi > 60 && gioi_tinh == "Nam")
+                {
+                    MessageBox.Show("Tuổi tối đa của nhân viên nam là 60", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (tuoi < 18)
+                {
+                    MessageBox.Show("Nhân viên phải đủ 18 tuổi trở lên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
